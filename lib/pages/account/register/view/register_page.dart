@@ -1,5 +1,10 @@
 // ignore_for_file: unnecessary_lambdas
 
+import 'package:Mark/config/repo/auth_repo.dart';
+import 'package:Mark/db/user_db.dart';
+import 'package:Mark/pages/home/view/home_page.dart';
+import 'package:dio/dio.dart';
+import 'package:elegant_notification/elegant_notification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/instance_manager.dart';
@@ -944,59 +949,69 @@ class _RegisterPageState extends State<RegisterPage> {
             // ),
             InkWell(
               onTap: () async {
-                // if (emailControler.text.isNotEmpty &&
-                //     phoneController.text.isNotEmpty &&
-                //     passwordControler.text.isNotEmpty &&
-                //     passwordConfirmControler.text.isNotEmpty &&
-                //     nameController.text.isNotEmpty) {
-                //   if (passwordControler.text == passwordConfirmControler.text) {
-                //     if (!isLoading) {
-                //       setState(() {
-                //         isLoading = true;
-                //       });
+                if (emailControler.text.isNotEmpty &&
+                    phoneController.text.isNotEmpty &&
+                    passwordControler.text.isNotEmpty &&
+                    passwordConfirmControler.text.isNotEmpty &&
+                    nameController.text.isNotEmpty) {
+                  if (passwordControler.text == passwordConfirmControler.text) {
+                    // if (!isLoading) {
+                    setState(() {
+                      isLoading = true;
+                    });
+                    Response returnLogin = await AuthRepo.signUser(
+                        email: emailControler.text,
+                        phone: phoneController.text,
+                        password: passwordControler.text,
+                        name: nameController.text);
 
-                //       Response response = await AuthRepo.signUser(
-                //         emailControler.text,
-                //         passwordControler.text,
-                //         nameController.text,
-                //         phoneController.text,
-                //       );
-
-                //       if (response.data.containsKey("jwt") == true) {
-                //         await DB().setUserdata(
-                //             emailControler.text, passwordControler.text, false);
-                //         await saveUserToken(
-                //           response.data['jwt'].toString(),
-                //         );
-                //         isLoading = false;
-                //         setState(() {
-                //           userData.setUserData(
-                //             response.data as Map<String, dynamic>,
-                //           );
-                //         });
-                //         await Get.to(const HomePage());
-                //       } else {
-                //         ElegantNotification.error(
-                //           description: Text(
-                //             response.data["Message"],
-                //           ),
-                //         ).show(context);
-                //       }
-                //     } else {
-                //       ElegantNotification.error(
-                //         description: const Text(
-                //           'Preencha todos os campos, por favor',
-                //         ),
-                //       ).show(context);
-                //     }
-                //   }
-                // } else {
-                //   ElegantNotification.error(
-                //     description: const Text(
-                //       'Preencha todos os campos, por favor',
-                //     ),
-                //   ).show(context);
-                // }
+                    if (returnLogin.data.containsKey('jwt') == true) {
+                      try {
+                        await DB().setUserdata(
+                          emailControler.text,
+                          passwordControler.text,
+                          false,
+                        );
+                      } catch (e) {
+                        await DB().deleteUser();
+                        await DB().setUserdata(
+                          emailControler.text,
+                          passwordControler.text,
+                          false,
+                        );
+                      }
+                      setState(() {
+                        isLoading = false;
+                        userData.setUserData(
+                          returnLogin.data as Map<String, dynamic>,
+                        );
+                      });
+                      await Get.to(const HomePage());
+                    } else {
+                      ElegantNotification.error(
+                        description: Text(
+                          returnLogin.data['Message'].toString(),
+                        ),
+                      ).show(context);
+                      setState(() {
+                        isLoading = false;
+                      });
+                    }
+                    // }
+                  } else {
+                    ElegantNotification.error(
+                      description: const Text(
+                        'Preencha todos os campos, por favor',
+                      ),
+                    ).show(context);
+                  }
+                } else {
+                  ElegantNotification.error(
+                    description: const Text(
+                      'Preencha todos os campos, por favor',
+                    ),
+                  ).show(context);
+                }
               },
               child: Container(
                 margin: const EdgeInsets.only(top: 30),
