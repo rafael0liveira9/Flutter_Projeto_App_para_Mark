@@ -76,7 +76,7 @@ class _LogoServicesPageState extends State<LogoServicesPage> {
         width: MediaQuery.of(context).size.width * 5,
       ),
       backgroundColor: backgroundColor,
-      bottomNavigationBar: const BottomBarCustom(),
+      // bottomNavigationBar: const BottomBarCustom(),
       body: Stack(
         children: [
           RefreshIndicator(

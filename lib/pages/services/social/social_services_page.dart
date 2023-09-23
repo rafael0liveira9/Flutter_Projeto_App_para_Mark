@@ -43,7 +43,7 @@ class _SocialServicesPageState extends State<SocialServicesPage> {
     try {
       Response response =
           await ServicesRepo.getServicesContrated(isSocial: true);
-      print(response.data);
+
       ContratedServiceModel contratedService =
           ContratedServiceModel.fromMap(response.data);
       List data = [];
@@ -70,7 +70,6 @@ class _SocialServicesPageState extends State<SocialServicesPage> {
 
   @override
   Widget build(BuildContext context) {
-    print(contratedServices);
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
@@ -79,7 +78,7 @@ class _SocialServicesPageState extends State<SocialServicesPage> {
         width: MediaQuery.of(context).size.width * 5,
       ),
       backgroundColor: backgroundColor,
-      bottomNavigationBar: const BottomBarCustom(),
+      // bottomNavigationBar: const BottomBarCustom(),
       body: Stack(
         children: [
           RefreshIndicator(

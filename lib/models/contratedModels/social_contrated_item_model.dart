@@ -193,63 +193,40 @@ class SocialServiceModel {
 
 class SocialBriefingModel {
   int id = 0;
-  String networkType = "";
-  String serviceType = "";
-  String imageBase = "";
-  String materialQuant = "";
   String dayHours = "";
-  String mediaFormat = "";
+  String mediaType = "";
   SocialBriefingModel({
     required this.id,
-    required this.networkType,
-    required this.serviceType,
-    required this.imageBase,
-    required this.materialQuant,
     required this.dayHours,
-    required this.mediaFormat,
+    required this.mediaType,
   });
 
   SocialBriefingModel copyWith({
     int? id,
-    String? networkType,
-    String? serviceType,
-    String? imageBase,
-    String? materialQuant,
     String? dayHours,
-    String? mediaFormat,
+    String? mediaType,
   }) {
     return SocialBriefingModel(
       id: id ?? this.id,
-      networkType: networkType ?? this.networkType,
-      serviceType: serviceType ?? this.serviceType,
-      imageBase: imageBase ?? this.imageBase,
-      materialQuant: materialQuant ?? this.materialQuant,
       dayHours: dayHours ?? this.dayHours,
-      mediaFormat: mediaFormat ?? this.mediaFormat,
+      mediaType: mediaType ?? this.mediaType,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'networkType': networkType,
-      'serviceType': serviceType,
-      'imageBase': imageBase,
-      'materialQuant': materialQuant,
       'dayHours': dayHours,
-      'mediaFormat': mediaFormat,
+      'mediaType': mediaType,
     };
   }
 
   factory SocialBriefingModel.fromMap(Map<String, dynamic> map) {
+    print({"--------->", map});
     return SocialBriefingModel(
       id: map['id'] as int,
-      networkType: map['networkType'] as String,
-      serviceType: map['serviceType'] as String,
-      imageBase: map['imageBase'] as String,
-      materialQuant: map['materialQuant'] as String,
       dayHours: map['daysHours'] as String,
-      mediaFormat: map['mediaFormat'] as String,
+      mediaType: map['mediaType'] != null ? map['mediaType'] as String : "",
     );
   }
 
@@ -259,33 +236,20 @@ class SocialBriefingModel {
       SocialBriefingModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() {
-    return 'SocialBriefingModel(id: $id, networkType: $networkType, serviceType: $serviceType, imageBase: $imageBase, materialQuant: $materialQuant, dayHours: $dayHours, mediaFormat: $mediaFormat)';
-  }
+  String toString() =>
+      'SocialBriefingModel(id: $id, dayHours: $dayHours, mediaType: $mediaType)';
 
   @override
   bool operator ==(covariant SocialBriefingModel other) {
     if (identical(this, other)) return true;
 
     return other.id == id &&
-        other.networkType == networkType &&
-        other.serviceType == serviceType &&
-        other.imageBase == imageBase &&
-        other.materialQuant == materialQuant &&
         other.dayHours == dayHours &&
-        other.mediaFormat == mediaFormat;
+        other.mediaType == mediaType;
   }
 
   @override
-  int get hashCode {
-    return id.hashCode ^
-        networkType.hashCode ^
-        serviceType.hashCode ^
-        imageBase.hashCode ^
-        materialQuant.hashCode ^
-        dayHours.hashCode ^
-        mediaFormat.hashCode;
-  }
+  int get hashCode => id.hashCode ^ dayHours.hashCode ^ mediaType.hashCode;
 }
 
 class SocialShowModel {
@@ -331,8 +295,11 @@ class SocialShowModel {
   factory SocialShowModel.fromMap(Map<String, dynamic> map) {
     return SocialShowModel(
       id: map['id'] as int,
-      allApproved: map['allApproved'] as bool,
-      isSendedByClient: map['isSendedByClient'] as bool,
+      allApproved:
+          map['allApproved'] != null ? map['allApproved'] as bool : false,
+      isSendedByClient: map['isSendedByClient'] != null
+          ? map['isSendedByClient'] as bool
+          : false,
       isRefused: map['isRefused'] as bool,
       feed: List<SocialFeedModel>.from(
         (map['feed'] as List).map<SocialFeedModel>(
@@ -380,6 +347,8 @@ class SocialFeedModel {
   int? imagesId;
   bool? approved;
   String? reasonRefuse;
+  String? comments;
+  // String? editedBy;
   SocialFeedImageModel? Images;
 
   SocialFeedModel({
@@ -389,6 +358,7 @@ class SocialFeedModel {
     this.imagesId,
     this.approved,
     this.reasonRefuse,
+    this.comments,
     this.Images,
   });
 
@@ -399,6 +369,7 @@ class SocialFeedModel {
     int? imagesId,
     bool? approved,
     String? reasonRefuse,
+    String? comments,
     SocialFeedImageModel? Images,
   }) {
     return SocialFeedModel(
@@ -408,6 +379,7 @@ class SocialFeedModel {
       imagesId: imagesId ?? this.imagesId,
       approved: approved ?? this.approved,
       reasonRefuse: reasonRefuse ?? this.reasonRefuse,
+      comments: comments ?? this.comments,
       Images: Images ?? this.Images,
     );
   }
@@ -420,11 +392,13 @@ class SocialFeedModel {
       'imagesId': imagesId,
       'approved': approved,
       'reasonRefuse': reasonRefuse,
+      'comments': comments,
       'Images': Images?.toMap(),
     };
   }
 
   factory SocialFeedModel.fromMap(Map<String, dynamic> map) {
+    print({'---------->', map});
     return SocialFeedModel(
       id: map['id'] as int,
       text: map['text'] as String,
@@ -433,6 +407,7 @@ class SocialFeedModel {
       approved: map['approved'] != null ? map['approved'] as bool : null,
       reasonRefuse:
           map['reasonRefuse'] != null ? map['reasonRefuse'] as String : null,
+      comments: map['comments'] != null ? map['comments'] as String : null,
       Images: map['Images'] != null
           ? SocialFeedImageModel.fromMap(map['Images'] as Map<String, dynamic>)
           : null,
@@ -446,7 +421,7 @@ class SocialFeedModel {
 
   @override
   String toString() {
-    return 'SocialFeedModel(id: $id, text: $text, type: $type, imagesId: $imagesId, approved: $approved, reasonRefuse: $reasonRefuse, Images: $Images)';
+    return 'SocialFeedModel(id: $id, text: $text, type: $type, imagesId: $imagesId, approved: $approved, reasonRefuse: $reasonRefuse, comments: $comments, Images: $Images)';
   }
 
   @override
@@ -459,6 +434,7 @@ class SocialFeedModel {
         other.imagesId == imagesId &&
         other.approved == approved &&
         other.reasonRefuse == reasonRefuse &&
+        other.comments == comments &&
         other.Images == Images;
   }
 
@@ -470,6 +446,7 @@ class SocialFeedModel {
         imagesId.hashCode ^
         approved.hashCode ^
         reasonRefuse.hashCode ^
+        comments.hashCode ^
         Images.hashCode;
   }
 }

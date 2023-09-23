@@ -121,25 +121,6 @@ class _SiteBrienfingPageState extends State<SiteBrienfingPage> {
                     String urlBriefingData = '';
                     String logoUrl = '';
 
-                    print({
-                      "url": urlText.text,
-                      "logo": logoUrl,
-                      "contactData": contact.text,
-                      "socialMidia": socials.text,
-                      "references": references.text.split(","),
-                      "companieId": serviceController.companieId.value,
-                      "archives": archives,
-                      "colors": siteController.colorsText.value,
-                      "urlName": urlNameText.text,
-                      "urlLogin": urlLoginText.text,
-                      "urlPass": urlPasswordText.text,
-                      "host": hostText.text,
-                      "hostPass": hostPasswordText.text,
-                      "hostLogin": hostLoginText.text,
-                      "urlBriefing": urlBriefingData,
-                      "id": serviceController.serviceId.value
-                    });
-
                     try {
                       if (fileRealized != null) {
                         if (fileRealized!.files.isNotEmpty) {

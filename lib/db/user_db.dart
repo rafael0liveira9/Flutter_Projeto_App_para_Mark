@@ -71,6 +71,8 @@ class DB {
             userData[0]['password'],
           );
 
+          print(response);
+
           await saveUserToken(response.data['jwt'].toString());
 
           userController.setUserData(

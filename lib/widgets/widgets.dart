@@ -1,6 +1,7 @@
 import 'package:Mark/globalController/widgets/bottom_navigation_controller.dart';
 import 'package:Mark/pages/briefing/site/site_briefing_page.dart';
 import 'package:Mark/pages/briefing/site/site_status_page.dart';
+import 'package:Mark/pages/briefing/social/social_briefing_page.dart';
 import 'package:Mark/pages/briefing/social/social_status_page.dart';
 import 'package:Mark/pages/payment/payment_page.dart';
 import 'package:flutter/material.dart';
@@ -681,17 +682,20 @@ class SocialServiceItemFlex extends StatefulWidget {
 }
 
 class _SocialServiceItemFlexState extends State<SocialServiceItemFlex> {
+  final serviceController = Get.put<ServiceController>(ServiceController());
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: InkWell(
         onTap: () {
-          // if (widget.service.SocialService.status == 1) {
-          //   Get.to(const SocialBrienfingPage());
-          // } else {
-          Get.to(const SocialStatusPage());
-          // }
-          // Get.to(const SocialShowPage());
+          serviceController.serviceId.value = widget.service.SocialService.id;
+          if (widget.service.SocialService.status == 1) {
+            Get.to(const SocialBrienfingPage());
+          } else {
+            Get.to(SocialStatusPage(
+              service: widget.service,
+            ));
+          }
         },
         child: Container(
           margin: const EdgeInsets.symmetric(

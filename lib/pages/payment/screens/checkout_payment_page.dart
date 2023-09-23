@@ -159,7 +159,6 @@ class _CheckoutPaymentPageState extends State<CheckoutPaymentPage> {
                                 },
                               ).show(context);
                             } catch (e) {
-                              print(e);
                               ElegantNotification.error(
                                 description: const Text("Ocorreu um erro"),
                               ).show(context);

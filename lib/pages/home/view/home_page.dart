@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> {
         decoration: const BoxDecoration(color: Colors.white),
       ),
       backgroundColor: backgroundColor,
-      bottomNavigationBar: const BottomBarCustom(),
+      // bottomNavigationBar: const BottomBarCustom(),
       body: Stack(
         children: [
           RefreshIndicator(

@@ -11,21 +11,25 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  await FCMConfig.instance.init(
-    defaultAndroidForegroundIcon:
-        '@mipmap/ic_launcher', //default is @mipmap/ic_launcher
-    defaultAndroidChannel: const AndroidNotificationChannel(
-      'high_importance_channel', // same as value from android setup
-      'Fcm config',
-      importance: Importance.high,
-      sound: RawResourceAndroidNotificationSound('notification'),
-    ),
-    onBackgroundMessage: _firebaseMessagingBackgroundHandler,
-  );
+  // await FCMConfig.instance.init(
+  //   defaultAndroidForegroundIcon:
+  //       '@mipmap/ic_launcher', //default is @mipmap/ic_launcher
+  //   defaultAndroidChannel: const AndroidNotificationChannel(
+  //     'high_importance_channel', // same as value from android setup
+  //     'Fcm config',
+  //     importance: Importance.high,
+  //     sound: RawResourceAndroidNotificationSound('notification'),
+  //   ),
+  //   onBackgroundMessage: _firebaseMessagingBackgroundHandler,
+  // );
 
-  FCMConfig.instance.messaging.getToken().then((token) {
-    print(token);
-  });
+  // try {
+  //   FCMConfig.instance.messaging.getToken().then((token) {
+  //     print(token);
+  //   });
+  // } catch (e) {
+  //   print(e);
+  // }
 
   initializeDateFormatting().then((_) => runApp(const App()));
 }
