@@ -31,7 +31,7 @@ class PaymentRepo {
       },
       options: Options(
         headers: {
-          "Authorization": userData.userdata.value.token,
+          "Authorization": userData.userdata.value?.token,
         },
       ),
     );

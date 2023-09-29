@@ -11,7 +11,7 @@ class ServicesRepo {
     return await api.get(
       "/contratedServices?social=$isSocial&logo=$isLogo&site=$isSite",
       options: Options(headers: {
-        "Authorization": userData.userdata.value.token,
+        "Authorization": userData.userdata.value?.token,
       }),
     );
   }

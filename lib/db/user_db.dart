@@ -64,6 +64,7 @@ class DB {
     await openDbUser();
     if (db!.isOpen) {
       final List<Map> userData = await db!.query('user');
+      print({"------>", userData});
       if (userData.isNotEmpty) {
         try {
           Response response = await AuthRepo.loginUser(
@@ -101,10 +102,8 @@ class DB {
     await openDbUser();
     if (db!.isOpen) {
       await deleteUser();
-      userController.setUserData(
-        {},
-      );
-      // Get.to(const OnboardingScreen());
+      userController.userdata.value = null;
+      Get.to(const LoginPage());
     }
   }
 

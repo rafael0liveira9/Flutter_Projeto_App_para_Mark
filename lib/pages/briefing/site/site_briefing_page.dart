@@ -1081,7 +1081,7 @@ class _SiteBrienfingPageState extends State<SiteBrienfingPage> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 14),
               child: Text(
-                "Vamos ajudá-lo no processo de hospedagem em nossos servidores, e maiores informações serão enviadas para o e-mail ${userController.userdata.value.User?.email}.",
+                "Vamos ajudá-lo no processo de hospedagem em nossos servidores, e maiores informações serão enviadas para o e-mail ${userController.userdata.value?.User?.email}.",
                 style: GoogleFonts.roboto(
                   fontSize: 10,
                   fontWeight: FontWeight.w400,
@@ -1319,7 +1319,7 @@ class _SiteBrienfingPageState extends State<SiteBrienfingPage> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 14),
               child: Text(
-                "Vamos ajudá-lo a comprar o domínio, e maiores informações serão enviadas para o e-mail ${userController.userdata.value.User?.email}.",
+                "Vamos ajudá-lo a comprar o domínio, e maiores informações serão enviadas para o e-mail ${userController.userdata.value?.User?.email}.",
                 style: GoogleFonts.roboto(
                   fontSize: 10,
                   fontWeight: FontWeight.w400,

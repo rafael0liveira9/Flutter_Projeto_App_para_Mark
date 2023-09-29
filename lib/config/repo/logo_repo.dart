@@ -32,7 +32,7 @@ class LogoRepo {
         "description": description,
       },
       options: Options(headers: {
-        "Authorization": userData.userdata.value.token,
+        "Authorization": userData.userdata.value?.token,
       }),
     );
   }
@@ -50,7 +50,7 @@ class LogoRepo {
         "isApproved": isApproved,
       },
       options: Options(headers: {
-        "Authorization": userData.userdata.value.token,
+        "Authorization": userData.userdata.value?.token,
       }),
     );
   }
@@ -63,7 +63,7 @@ class LogoRepo {
       "/logo/send-feedback",
       data: {"id": serviceId, "comments": comments, "stars": stars},
       options: Options(headers: {
-        "Authorization": userData.userdata.value.token,
+        "Authorization": userData.userdata.value?.token,
       }),
     );
   }

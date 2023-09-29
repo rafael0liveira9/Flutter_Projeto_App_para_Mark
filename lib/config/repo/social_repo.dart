@@ -10,7 +10,7 @@ class SocialRepo {
       "/briefing/social",
       data: data,
       options: Options(headers: {
-        "Authorization": userData.userdata.value.token,
+        "Authorization": userData.userdata.value?.token,
       }),
     );
   }
@@ -22,7 +22,7 @@ class SocialRepo {
       "/social/update-show",
       data: data,
       options: Options(headers: {
-        "Authorization": userData.userdata.value.token,
+        "Authorization": userData.userdata.value?.token,
       }),
     );
   }
@@ -34,7 +34,7 @@ class SocialRepo {
       "/social/update-approve",
       data: data,
       options: Options(headers: {
-        "Authorization": userData.userdata.value.token,
+        "Authorization": userData.userdata.value?.token,
       }),
     );
   }

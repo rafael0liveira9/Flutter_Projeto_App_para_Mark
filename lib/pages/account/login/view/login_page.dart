@@ -2,6 +2,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:elegant_notification/elegant_notification.dart';
+import 'package:elegant_notification/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
@@ -50,8 +51,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                 top: 20,
               ),
               height: MediaQuery.of(context).size.height * 0.2,
-              child: Image.network(
-                "https://www.kadencewp.com/wp-content/uploads/2020/10/alogo-2.png",
+              child: Image.asset(
+                "assets/icons/splash_logo.png",
               ),
             ),
             FadeInUpWidget(
@@ -184,37 +185,51 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                             setState(() {
                               isLoading = true;
                             });
-                            Response returnLogin = await AuthRepo.loginUser(
-                              email.text,
-                              password.text,
-                            );
+                            try {
+                              Response returnLogin = await AuthRepo.loginUser(
+                                email.text,
+                                password.text,
+                              );
 
-                            if (returnLogin.data.containsKey('jwt') == true) {
-                              try {
-                                await DB().setUserdata(
-                                  email.text,
-                                  password.text,
-                                  false,
-                                );
-                              } catch (e) {
-                                await DB().deleteUser();
-                                await DB().setUserdata(
-                                  email.text,
-                                  password.text,
-                                  false,
-                                );
+                              if (returnLogin.data.containsKey('jwt') == true) {
+                                try {
+                                  await DB().setUserdata(
+                                    email.text,
+                                    password.text,
+                                    false,
+                                  );
+                                } catch (e) {
+                                  await DB().deleteUser();
+                                  await DB().setUserdata(
+                                    email.text,
+                                    password.text,
+                                    false,
+                                  );
+                                }
+                                setState(() {
+                                  isLoading = false;
+                                  userData.setUserData(
+                                    returnLogin.data as Map<String, dynamic>,
+                                  );
+                                });
+                                await Get.to(const HomePage());
+                              } else {
+                                ElegantNotification.error(
+                                  description: Text(
+                                    returnLogin.data['Message'].toString(),
+                                  ),
+                                ).show(context);
+                                setState(() {
+                                  isLoading = false;
+                                });
                               }
-                              setState(() {
-                                isLoading = false;
-                                userData.setUserData(
-                                  returnLogin.data as Map<String, dynamic>,
-                                );
-                              });
-                              await Get.to(const HomePage());
-                            } else {
+                            } catch (e) {
                               ElegantNotification.error(
-                                description: Text(
-                                  returnLogin.data['Message'].toString(),
+                                animation: AnimationType.fromTop,
+                                notificationPosition:
+                                    NotificationPosition.topCenter,
+                                description: const Text(
+                                  "Email ou Senha incorreta. Tente novamente",
                                 ),
                               ).show(context);
                               setState(() {

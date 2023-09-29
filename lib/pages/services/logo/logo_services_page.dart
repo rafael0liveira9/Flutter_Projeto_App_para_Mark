@@ -98,7 +98,7 @@ class _LogoServicesPageState extends State<LogoServicesPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Olá, ${userData.userdata.value.name}",
+                              "Olá, ${userData.userdata.value?.name}",
                               style: GoogleFonts.roboto(
                                 color: neutralTen,
                                 fontWeight: FontWeight.w700,

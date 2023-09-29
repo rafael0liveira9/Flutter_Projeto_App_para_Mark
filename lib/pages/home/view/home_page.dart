@@ -1,3 +1,4 @@
+import 'package:Mark/db/user_db.dart';
 import 'package:Mark/pages/services/logo/logo_services_page.dart';
 import 'package:Mark/pages/services/site/site_services_page.dart';
 import 'package:Mark/pages/services/social/social_services_page.dart';
@@ -83,6 +84,35 @@ class _HomePageState extends State<HomePage> {
       drawer: Container(
         width: 300,
         decoration: const BoxDecoration(color: Colors.white),
+        child: ListView(
+          padding: EdgeInsets.fromLTRB(
+            20,
+            MediaQuery.of(context).padding.top,
+            20,
+            MediaQuery.of(context).padding.bottom,
+          ),
+          children: [
+            ElevatedButton(
+              onPressed: () async {
+                await DB().logoutUser();
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent,
+                foregroundColor: mainPrimaryColor,
+                surfaceTintColor: mainPrimaryColor,
+              ),
+              child: Text(
+                "Sair da Conta",
+                style: GoogleFonts.roboto(
+                  color: neutralTen,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14,
+                ),
+              ),
+            )
+          ],
+        ),
       ),
       backgroundColor: backgroundColor,
       // bottomNavigationBar: const BottomBarCustom(),
@@ -107,7 +137,7 @@ class _HomePageState extends State<HomePage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Olá, ${userData.userdata.value.name}",
+                              "Olá, ${userData.userdata.value?.name}",
                               style: GoogleFonts.roboto(
                                 color: neutralTen,
                                 fontWeight: FontWeight.w700,

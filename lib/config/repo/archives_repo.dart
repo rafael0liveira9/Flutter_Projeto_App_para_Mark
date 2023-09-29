@@ -14,7 +14,7 @@ class ArchivesRepo {
       data: data,
       queryParameters: {"companieId": serviceController.companieId.value},
       options: Options(
-        headers: {"Authorization": userData.userdata.value.token},
+        headers: {"Authorization": userData.userdata.value?.token},
       ),
     );
     return returnData;

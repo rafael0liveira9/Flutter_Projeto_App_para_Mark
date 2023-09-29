@@ -10,7 +10,7 @@ class SiteRepo {
       "/briefing/site",
       data: data,
       options: Options(headers: {
-        "Authorization": userData.userdata.value.token,
+        "Authorization": userData.userdata.value?.token,
       }),
     );
   }
@@ -28,7 +28,7 @@ class SiteRepo {
         "imageId": imageId,
       },
       options: Options(headers: {
-        "Authorization": userData.userdata.value.token,
+        "Authorization": userData.userdata.value?.token,
       }),
     );
   }
@@ -44,7 +44,7 @@ class SiteRepo {
         "id": serviceId,
       },
       options: Options(headers: {
-        "Authorization": userData.userdata.value.token,
+        "Authorization": userData.userdata.value?.token,
       }),
     );
   }
@@ -61,7 +61,7 @@ class SiteRepo {
         "refuseReason": refuseReason,
       },
       options: Options(headers: {
-        "Authorization": userData.userdata.value.token,
+        "Authorization": userData.userdata.value?.token,
       }),
     );
   }

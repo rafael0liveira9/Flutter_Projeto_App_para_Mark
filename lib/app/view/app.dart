@@ -34,7 +34,7 @@ class _AppState extends State<App> {
     setState(() {
       userData;
     });
-    if (userData.userdata.value.token != null) {
+    if (userData.userdata.value?.token != null) {
       Timer(const Duration(seconds: 3), () {
         Get.to(const HomePage());
       });
