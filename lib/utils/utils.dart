@@ -1593,8 +1593,8 @@ List<List<dynamic>> sliceArray(List<dynamic> data) {
   return backup;
 }
 
-int getPercentage(List data, String value) {
-  return (((data.indexOf(value) + 1) / data.length) * 100).floor();
+int getPercentage(List data, int value) {
+  return ((value / data.length) * 100).floor();
 }
 
 String slugify(String word) {

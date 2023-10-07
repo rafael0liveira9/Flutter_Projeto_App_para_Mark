@@ -9,6 +9,7 @@ class UserModel {
   String? phone;
   String? token;
   UserData? User;
+  CompanieData? Companie;
 
   UserModel({
     this.name,
@@ -16,6 +17,7 @@ class UserModel {
     this.phone,
     this.token,
     this.User,
+    this.Companie,
   });
 
   UserModel copyWith({
@@ -24,6 +26,7 @@ class UserModel {
     String? phone,
     String? token,
     UserData? User,
+    CompanieData? Companie,
   }) {
     return UserModel(
       name: name ?? this.name,
@@ -31,6 +34,7 @@ class UserModel {
       phone: phone ?? this.phone,
       token: token ?? this.token,
       User: User ?? this.User,
+      Companie: Companie ?? this.Companie,
     );
   }
 
@@ -41,20 +45,22 @@ class UserModel {
       'phone': phone,
       'token': token,
       'User': User?.toMap(),
+      'Companie': Companie?.toMap(),
     };
   }
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
-    print({
-      "------------------------>",
-      map,
-    });
     return UserModel(
       name: map['name'] != null ? map['name'] as String : null,
       document: map['document'] != null ? map['document'] as String : null,
       phone: map['phone'] != null ? map['phone'] as String : null,
       token: map['jwt'] != null ? map['jwt'] as String : null,
-      User: UserData.fromMap(map['User'] as Map<String, dynamic>),
+      User: map['User'] != null
+          ? UserData.fromMap(map['User'] as Map<String, dynamic>)
+          : null,
+      Companie: map['Companie'] != null
+          ? CompanieData.fromMap(map['Companie'] as Map<String, dynamic>)
+          : null,
     );
   }
 
@@ -65,7 +71,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(name: $name, document: $document, phone: $phone, token: $token, User: $User)';
+    return 'UserModel(name: $name, document: $document, phone: $phone, token: $token, User: $User, Companie: $Companie)';
   }
 
   @override
@@ -76,7 +82,8 @@ class UserModel {
         other.document == document &&
         other.phone == phone &&
         other.token == token &&
-        other.User == User;
+        other.User == User &&
+        other.Companie == Companie;
   }
 
   @override
@@ -85,7 +92,90 @@ class UserModel {
         document.hashCode ^
         phone.hashCode ^
         token.hashCode ^
-        User.hashCode;
+        User.hashCode ^
+        Companie.hashCode;
+  }
+}
+
+class CompanieData {
+  int id = 0;
+  String companyName = "";
+  String document = "";
+  String documentType = "";
+  int ownerId = 0;
+
+  CompanieData({
+    required this.id,
+    required this.companyName,
+    required this.document,
+    required this.documentType,
+    required this.ownerId,
+  });
+
+  CompanieData copyWith({
+    int? id,
+    String? companyName,
+    String? document,
+    String? documentType,
+    int? ownerId,
+  }) {
+    return CompanieData(
+      id: id ?? this.id,
+      companyName: companyName ?? this.companyName,
+      document: document ?? this.document,
+      documentType: documentType ?? this.documentType,
+      ownerId: ownerId ?? this.ownerId,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'companyName': companyName,
+      'document': document,
+      'documentType': documentType,
+      'ownerId': ownerId,
+    };
+  }
+
+  factory CompanieData.fromMap(Map<String, dynamic> map) {
+    return CompanieData(
+      id: map['id'] as int,
+      companyName: map['companyName'] as String,
+      document: map['document'] as String,
+      documentType: map['documentType'] as String,
+      ownerId: map['ownerId'] as int,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory CompanieData.fromJson(String source) =>
+      CompanieData.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'CompanieData(id: $id, companyName: $companyName, document: $document, documentType: $documentType, ownerId: $ownerId)';
+  }
+
+  @override
+  bool operator ==(covariant CompanieData other) {
+    if (identical(this, other)) return true;
+
+    return other.id == id &&
+        other.companyName == companyName &&
+        other.document == document &&
+        other.documentType == documentType &&
+        other.ownerId == ownerId;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+        companyName.hashCode ^
+        document.hashCode ^
+        documentType.hashCode ^
+        ownerId.hashCode;
   }
 }
 

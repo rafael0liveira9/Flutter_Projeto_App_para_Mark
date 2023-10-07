@@ -405,7 +405,7 @@ class _LogoServiceItemFlexState extends State<LogoServiceItemFlex> {
                                 color: neutralSix,
                               ),
                             ),
-                            Expanded(
+                            Flexible(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -420,7 +420,6 @@ class _LogoServiceItemFlexState extends State<LogoServiceItemFlex> {
                                   Text(
                                     logoStatus[
                                         widget.service.LogoService.status - 1],
-                                    overflow: TextOverflow.ellipsis,
                                     style: GoogleFonts.roboto(
                                       color: yellowColor,
                                       fontWeight: FontWeight.w700,
@@ -475,9 +474,10 @@ class _LogoServiceItemFlexState extends State<LogoServiceItemFlex> {
                   ),
                 ],
               ),
-              const PercentageWidget(percentage: ""
-                  // '${getPercentage(statusArray, widget.service.LogoService.status)}%',
-                  )
+              PercentageWidget(
+                percentage:
+                    '${getPercentage(logoStatus, widget.service.LogoService.status)}%',
+              )
             ],
           ),
         ),
@@ -627,30 +627,32 @@ class _SiteServiceItemFlexState extends State<SiteServiceItemFlex> {
                                 color: neutralSix,
                               ),
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Data de Entrega",
-                                  style: GoogleFonts.roboto(
-                                    color: neutralSix,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 11,
+                            Flexible(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Data de Entrega",
+                                    style: GoogleFonts.roboto(
+                                      color: neutralSix,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 11,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  widget.service.SiteService.dueDate != null
-                                      ? DateFormat().format(DateTime.parse(
-                                          widget.service.SiteService.dueDate
-                                              .toString()))
-                                      : "Sem data",
-                                  style: GoogleFonts.roboto(
-                                    color: neutralThree,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 11,
+                                  Text(
+                                    widget.service.SiteService.dueDate != null
+                                        ? DateFormat().format(DateTime.parse(
+                                            widget.service.SiteService.dueDate
+                                                .toString()))
+                                        : "Sem data",
+                                    style: GoogleFonts.roboto(
+                                      color: neutralThree,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 11,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             )
                           ],
                         ),
@@ -659,8 +661,10 @@ class _SiteServiceItemFlexState extends State<SiteServiceItemFlex> {
                   ),
                 ],
               ),
-              const PercentageWidget(percentage: ""),
-              // '${getPercentage(statusArray, widget.service.SiteService.status)}%')
+              PercentageWidget(
+                percentage:
+                    '${getPercentage(siteStatus, widget.service.SiteService.status)}%',
+              )
             ],
           ),
         ),
@@ -776,27 +780,30 @@ class _SocialServiceItemFlexState extends State<SocialServiceItemFlex> {
                                 color: neutralSix,
                               ),
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Status Atual",
-                                  style: GoogleFonts.roboto(
-                                    color: neutralSix,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 11,
+                            Flexible(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Status Atual",
+                                    style: GoogleFonts.roboto(
+                                      color: neutralSix,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 11,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  socialStatus[
-                                      widget.service.SocialService.status - 1],
-                                  style: GoogleFonts.roboto(
-                                    color: yellowColor,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 11,
+                                  Text(
+                                    socialStatus[
+                                        widget.service.SocialService.status -
+                                            1],
+                                    style: GoogleFonts.roboto(
+                                      color: yellowColor,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 11,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             )
                           ],
                         ),
@@ -843,30 +850,10 @@ class _SocialServiceItemFlexState extends State<SocialServiceItemFlex> {
                   ),
                 ],
               ),
-              const PercentageWidget(percentage: "")
-              // '${getPercentage(statusArray, widget.service.SocialService.status)}%')
-              // Container(
-              //   margin: const EdgeInsets.only(right: 8),
-              //   decoration: const BoxDecoration(
-              //     image: DecorationImage(
-              //       fit: BoxFit.contain,
-              //       image: AssetImage(
-              //         "assets/images/rectangleOrange.png",
-              //       ),
-              //     ),
-              //   ),
-              //   width: 42,
-              //   height: 80,
-              //   alignment: Alignment.center,
-              //   child: Text(
-              //     "20%",
-              //     style: GoogleFonts.roboto(
-              //       color: Colors.white,
-              //       fontWeight: FontWeight.w900,
-              //       fontSize: 16,
-              //     ),
-              //   ),
-              // ),
+              PercentageWidget(
+                percentage:
+                    '${getPercentage(socialStatus, widget.service.SocialService.status)}%',
+              )
             ],
           ),
         ),

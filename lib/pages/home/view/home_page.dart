@@ -8,12 +8,9 @@ import 'package:flutter/scheduler.dart';
 import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:Mark/config/repo/services_repo.dart';
 import 'package:Mark/consts/colors.dart';
 import 'package:Mark/globalController/service_controller.dart';
 import 'package:Mark/globalController/user_controller.dart';
-import 'package:Mark/models/contrated_services_model.dart';
-import 'package:Mark/utils/utils.dart';
 import 'package:Mark/widgets/widgets.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,8 +24,6 @@ class _HomePageState extends State<HomePage> {
   bool isLoading = true;
   final userData = Get.put<UserController>(UserController());
   final serviceController = Get.put<ServiceController>(ServiceController());
-  ContratedServiceModel? contratedServices;
-  List contrateds = [];
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -45,25 +40,9 @@ class _HomePageState extends State<HomePage> {
       isLoading = true;
     });
     try {
-      Response response = await ServicesRepo.getServicesContrated();
-      ContratedServiceModel contratedService =
-          ContratedServiceModel.fromMap(response.data);
-      List data = [];
-
-      for (var i = 0; i < contratedService.LogoContratedItems.length; i++) {
-        data.add(contratedService.LogoContratedItems[i]);
-      }
-      // for (var i = 0; i < contratedService.SiteContratedItems.length; i++) {
-      //   data.add(contratedService.SiteContratedItems[i]);
-      // }
-      // for (var i = 0; i < contratedService.SocialContratedItems.length; i++) {
-      //   data.add(contratedService.SocialContratedItems[i]);
-      // }
-
       setState(() {
-        contrateds = sliceArray(data);
-        contratedServices = contratedService;
-        serviceController.companieId.value = contratedService.companieId;
+        serviceController.companieId.value =
+            userData.userdata.value!.Companie!.id;
         isLoading = false;
       });
     } on DioException catch (e) {
@@ -172,14 +151,14 @@ class _HomePageState extends State<HomePage> {
                                     children: [
                                       ServiceItemFlex(
                                         type: "Logo",
-                                        status: "1",
+                                        status: "Aguardando",
                                         onTap: () {
                                           Get.to(const LogoServicesPage());
                                         },
                                       ),
                                       ServiceItemFlex(
                                         type: "Social",
-                                        status: "1",
+                                        status: "Aguardando",
                                         onTap: () {
                                           Get.to(const SocialServicesPage());
                                         },
@@ -197,7 +176,7 @@ class _HomePageState extends State<HomePage> {
                                     children: [
                                       ServiceItemFlex(
                                         type: "Site",
-                                        status: "1",
+                                        status: "Aguardando",
                                         onTap: () {
                                           Get.to(const SiteServicesPage());
                                         },

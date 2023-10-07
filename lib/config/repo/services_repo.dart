@@ -7,6 +7,7 @@ class ServicesRepo {
   static Future getServicesContrated(
       {bool isLogo = false, bool isSite = false, bool isSocial = false}) async {
     final userData = Get.put<UserController>(UserController());
+    print(userData.userdata.value?.token);
 
     return await api.get(
       "/contratedServices?social=$isSocial&logo=$isLogo&site=$isSite",

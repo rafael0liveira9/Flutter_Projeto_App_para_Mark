@@ -1,5 +1,7 @@
 // ignore_for_file: unnecessary_lambdas, inference_failure_on_function_return_type, prefer_final_locals, omit_local_variable_types, avoid_dynamic_calls, strict_raw_type, inference_failure_on_function_invocation, use_build_context_synchronously
 
+import 'package:Mark/db/user_db.dart';
+import 'package:Mark/pages/home/view/home_page.dart';
 import 'package:dio/dio.dart';
 import 'package:elegant_notification/elegant_notification.dart';
 import 'package:elegant_notification/resources/arrays.dart';
@@ -9,10 +11,8 @@ import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:Mark/config/repo/auth_repo.dart';
 import 'package:Mark/consts/colors.dart';
-import 'package:Mark/db/user_db.dart';
 import 'package:Mark/globalController/user_controller.dart';
 import 'package:Mark/pages/account/register/view/register_page.dart';
-import 'package:Mark/pages/home/view/home_page.dart';
 import 'package:Mark/widgets/widgets.dart';
 
 class LoginPage extends StatefulWidget {
@@ -190,6 +190,8 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
                                 email.text,
                                 password.text,
                               );
+
+                              print(returnLogin.data);
 
                               if (returnLogin.data.containsKey('jwt') == true) {
                                 try {
