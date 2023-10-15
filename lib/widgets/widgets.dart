@@ -18,7 +18,16 @@ import 'package:Mark/pages/briefing/logo/logo_briefing_page.dart';
 import 'package:Mark/pages/briefing/logo/logo_status_page.dart';
 import 'package:Mark/utils/utils.dart';
 
+import 'package:url_launcher/url_launcher.dart';
+
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+
+Future<void> _launchUrl() async {
+  Uri uriParse = Uri.parse("https://wa.link/v0a3e4");
+  if (!await launchUrl(uriParse)) {
+    throw Exception('Could not launch $uriParse');
+  }
+}
 
 class FadeInUpWidget extends StatefulWidget {
   final Widget child;
@@ -152,7 +161,6 @@ class ServiceItemFlex extends StatelessWidget {
           margin: const EdgeInsets.symmetric(
             horizontal: 5,
           ),
-          height: 152,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(8),
@@ -205,7 +213,6 @@ class ServiceItemFlex extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    height: 96,
                     padding: const EdgeInsets.symmetric(
                       horizontal: 20,
                       vertical: 15,
@@ -223,67 +230,81 @@ class ServiceItemFlex extends StatelessWidget {
                                 right: 10,
                               ),
                               child: const Icon(
-                                Icons.check,
+                                Icons.login,
                                 color: neutralSix,
                               ),
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Status Atual",
-                                  style: GoogleFonts.roboto(
-                                    color: neutralSix,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 11,
-                                  ),
-                                ),
-                                Text(
-                                  status,
-                                  style: GoogleFonts.roboto(
-                                    color: yellowColor,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 11,
-                                  ),
-                                ),
-                              ],
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  RichText(
+                                    text: TextSpan(
+                                      text: "Veja todos os seus serviços de ",
+                                      style: GoogleFonts.roboto(
+                                        color: neutralSix,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 11,
+                                      ),
+                                      children: [
+                                        TextSpan(
+                                          text: status,
+                                          style: GoogleFonts.roboto(
+                                            color: mainPrimaryColor,
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 11,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text: " contratados",
+                                          style: GoogleFonts.roboto(
+                                            color: neutralSix,
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 11,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
                             )
                           ],
                         ),
-                        Row(
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.only(
-                                right: 10,
-                              ),
-                              child: const Icon(
-                                Icons.calendar_month,
-                                color: neutralSix,
-                              ),
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Data de Entrega",
-                                  style: GoogleFonts.roboto(
-                                    color: neutralSix,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 11,
-                                  ),
-                                ),
-                                Text(
-                                  "Sem data",
-                                  style: GoogleFonts.roboto(
-                                    color: neutralThree,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 11,
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
+                        // Row(
+                        //   children: [
+                        //     Container(
+                        //       margin: const EdgeInsets.only(
+                        //         right: 10,
+                        //       ),
+                        //       child: const Icon(
+                        //         Icons.calendar_month,
+                        //         color: neutralSix,
+                        //       ),
+                        //     ),
+                        //     Column(
+                        //       crossAxisAlignment: CrossAxisAlignment.start,
+                        //       children: [
+                        //         Text(
+                        //           "Data de Entrega",
+                        //           style: GoogleFonts.roboto(
+                        //             color: neutralSix,
+                        //             fontWeight: FontWeight.w700,
+                        //             fontSize: 11,
+                        //           ),
+                        //         ),
+                        //         Text(
+                        //           "Sem data",
+                        //           style: GoogleFonts.roboto(
+                        //             color: neutralThree,
+                        //             fontWeight: FontWeight.w700,
+                        //             fontSize: 11,
+                        //           ),
+                        //         ),
+                        //       ],
+                        //     )
+                        //   ],
+                        // ),
                       ],
                     ),
                   ),
@@ -592,27 +613,29 @@ class _SiteServiceItemFlexState extends State<SiteServiceItemFlex> {
                                 color: neutralSix,
                               ),
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Status Atual",
-                                  style: GoogleFonts.roboto(
-                                    color: neutralSix,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 11,
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Status Atual",
+                                    style: GoogleFonts.roboto(
+                                      color: neutralSix,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 11,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  siteStatus[
-                                      widget.service.SiteService.status - 1],
-                                  style: GoogleFonts.roboto(
-                                    color: yellowColor,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 11,
+                                  Text(
+                                    siteStatus[
+                                        widget.service.SiteService.status - 1],
+                                    style: GoogleFonts.roboto(
+                                      color: yellowColor,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 11,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             )
                           ],
                         ),
@@ -627,7 +650,7 @@ class _SiteServiceItemFlexState extends State<SiteServiceItemFlex> {
                                 color: neutralSix,
                               ),
                             ),
-                            Flexible(
+                            Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -780,7 +803,7 @@ class _SocialServiceItemFlexState extends State<SocialServiceItemFlex> {
                                 color: neutralSix,
                               ),
                             ),
-                            Flexible(
+                            Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -1127,29 +1150,33 @@ class _BottomBarCustomState extends State<BottomBarCustom> {
       color: Colors.white,
       child: SalomonBottomBar(
         currentIndex: navigationController.indexSelected.value,
-        onTap: (i) =>
-            setState(() => navigationController.indexSelected.value = i),
+        onTap: (i) async {
+          setState(() => navigationController.indexSelected.value = i);
+          if (i == 1) {
+            await _launchUrl();
+          }
+        },
         items: [
           SalomonBottomBarItem(
             icon: const Icon(Icons.home),
             title: const Text("Home"),
             selectedColor: Colors.purple,
           ),
-          SalomonBottomBarItem(
-            icon: const Icon(Icons.archive_rounded),
-            title: const Text("Arquivos"),
-            selectedColor: Colors.pink,
-          ),
+          // SalomonBottomBarItem(
+          //   icon: const Icon(Icons.archive_rounded),
+          //   title: const Text("Arquivos"),
+          //   selectedColor: Colors.pink,
+          // ),
           SalomonBottomBarItem(
             icon: const Icon(Icons.payment_rounded),
             title: const Text("Pagamentos"),
             selectedColor: Colors.orange,
           ),
-          SalomonBottomBarItem(
-            icon: const Icon(Icons.person),
-            title: const Text("Perfil"),
-            selectedColor: Colors.teal,
-          ),
+          // SalomonBottomBarItem(
+          //   icon: const Icon(Icons.person),
+          //   title: const Text("Perfil"),
+          //   selectedColor: Colors.teal,
+          // ),
         ],
       ),
     );

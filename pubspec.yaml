@@ -30,6 +30,7 @@ dependencies:
   pinch_zoom_release_unzoom: ^1.0.1
   salomon_bottom_bar: ^3.3.2
   sqflite: ^2.2.8+4
+  url_launcher: ^6.1.14
 
 dev_dependencies:
   flutter_lints: ^2.0.0

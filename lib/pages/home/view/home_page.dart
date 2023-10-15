@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       backgroundColor: backgroundColor,
-      // bottomNavigationBar: const BottomBarCustom(),
+      bottomNavigationBar: const BottomBarCustom(),
       body: Stack(
         children: [
           RefreshIndicator(
@@ -151,16 +151,16 @@ class _HomePageState extends State<HomePage> {
                                     children: [
                                       ServiceItemFlex(
                                         type: "Logo",
-                                        status: "Aguardando",
+                                        status: "Logos",
                                         onTap: () {
                                           Get.to(const LogoServicesPage());
                                         },
                                       ),
                                       ServiceItemFlex(
-                                        type: "Social",
-                                        status: "Aguardando",
+                                        type: "Site",
+                                        status: "Sites",
                                         onTap: () {
-                                          Get.to(const SocialServicesPage());
+                                          Get.to(const SiteServicesPage());
                                         },
                                       ),
                                     ],
@@ -175,10 +175,10 @@ class _HomePageState extends State<HomePage> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       ServiceItemFlex(
-                                        type: "Site",
-                                        status: "Aguardando",
+                                        type: "Social",
+                                        status: "Rede Sociais",
                                         onTap: () {
-                                          Get.to(const SiteServicesPage());
+                                          Get.to(const SocialServicesPage());
                                         },
                                       ),
                                     ],

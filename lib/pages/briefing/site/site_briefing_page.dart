@@ -68,7 +68,6 @@ class _SiteBrienfingPageState extends State<SiteBrienfingPage> {
 
   @override
   Widget build(BuildContext context) {
-    print(references.text.split(","));
     return Scaffold(
       appBar: AppBar(
         backgroundColor: lightWhite,
@@ -110,7 +109,6 @@ class _SiteBrienfingPageState extends State<SiteBrienfingPage> {
               onTap: () async {
                 if (description.text.isNotEmpty &&
                     references.text.isNotEmpty &&
-                    references.text.split(",").length >= 3 &&
                     siteController.colorsText.isNotEmpty) {
                   if (!isLoading) {
                     setState(() {
@@ -173,7 +171,7 @@ class _SiteBrienfingPageState extends State<SiteBrienfingPage> {
                         "logo": logoUrl,
                         "contactData": contact.text,
                         "socialMidia": socials.text,
-                        "references": references.text.split(", "),
+                        "references": references.text,
                         "companieId": serviceController.companieId.value,
                         "archives": archives,
                         "colors": siteController.colorSelected
@@ -220,7 +218,6 @@ class _SiteBrienfingPageState extends State<SiteBrienfingPage> {
                 decoration: BoxDecoration(
                   color: description.text.isNotEmpty &&
                           references.text.isNotEmpty &&
-                          references.text.split(",").length >= 3 &&
                           siteController.colorsText.isNotEmpty
                       ? mainSecondayColor
                       : const Color(0xFf1f1f1f).withOpacity(
@@ -238,7 +235,6 @@ class _SiteBrienfingPageState extends State<SiteBrienfingPage> {
                     fontWeight: FontWeight.w700,
                     color: description.text.isNotEmpty &&
                             references.text.isNotEmpty &&
-                            references.text.split(",").length >= 3 &&
                             siteController.colorsText.isNotEmpty
                         ? Colors.white
                         : neutralTen.withOpacity(0.38),

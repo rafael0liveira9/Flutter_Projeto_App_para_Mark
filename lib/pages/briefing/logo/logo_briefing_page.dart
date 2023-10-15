@@ -135,8 +135,7 @@ class _LogoBrienfingPageState extends State<LogoBrienfingPage> {
                           especification.text.isNotEmpty &&
                           typography.text.isNotEmpty &&
                           description.text.isNotEmpty &&
-                          references.text.isNotEmpty &&
-                          references.text.split(",").length >= 3
+                          references.text.isNotEmpty
                       ? mainSecondayColor
                       : const Color(0xFf1f1f1f).withOpacity(
                           0.12,
@@ -156,8 +155,7 @@ class _LogoBrienfingPageState extends State<LogoBrienfingPage> {
                             especification.text.isNotEmpty &&
                             typography.text.isNotEmpty &&
                             description.text.isNotEmpty &&
-                            references.text.isNotEmpty &&
-                            references.text.split(",").length > 2
+                            references.text.isNotEmpty
                         ? Colors.white
                         : neutralTen.withOpacity(0.38),
                   ),

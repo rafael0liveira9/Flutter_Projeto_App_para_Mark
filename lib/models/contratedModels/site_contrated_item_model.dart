@@ -237,7 +237,7 @@ class SiteServiceModel {
 class SiteBriefingModel {
   int id = 0;
   String url = "";
-  List references = [];
+  String references = "";
   String? logo = '';
   String? contactData = "";
   String? socialMidia = "";
@@ -254,7 +254,7 @@ class SiteBriefingModel {
   SiteBriefingModel copyWith({
     int? id,
     String? url,
-    List? references,
+    String? references,
     String? logo,
     String? contactData,
     String? socialMidia,
@@ -284,7 +284,7 @@ class SiteBriefingModel {
     return SiteBriefingModel(
       id: map['id'] as int,
       url: map['url'] as String,
-      references: List.from((map['references'] as List)),
+      references: map['references'].toString(),
       logo: map['logo'] as String,
       contactData: map['contactData'] as String,
       socialMidia: map['socialMidia'] as String,
@@ -307,7 +307,7 @@ class SiteBriefingModel {
 
     return other.id == id &&
         other.url == url &&
-        listEquals(other.references, references) &&
+        other.references == references &&
         other.logo == logo &&
         other.contactData == contactData &&
         other.socialMidia == socialMidia;
